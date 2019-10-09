@@ -1,1 +1,2 @@
 # SimpleCalc-Java
+Hi! This is a basic calculator that I created through my knowledge of Java. I studied Java at school for four years, and now I expanded my knowledge to GUI implementation through online lessons to create this calculator. It still contains only four elementary math functions, but I hope to improve this code by including a wider range of functions, and possibly reducing any redundancy! I will be happy to collaborate with anyone willing to do so!
