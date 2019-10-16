@@ -4,10 +4,10 @@ public class Calc implements ActionListener
 {
     JFrame f;
     JPanel p;
-    JButton b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16;
+    JButton b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16,b17,b18,b19;
     JLabel res;
     String s="";
-    
+
     public static void main(String args[])
     {
         Calc c=new Calc();
@@ -33,9 +33,12 @@ public class Calc implements ActionListener
         b14= new JButton("=");
         b15=new JButton("C");
         b16=new JButton(".");
+        b17=new JButton("sin");
+        b18=new JButton("cos");
+        b19=new JButton("tan");
         res=new JLabel();
-       
-       
+
+
         b0.setBounds(50,50,50,50);
         b1.setBounds(50,50,50,50);
         b2.setBounds(50,50,50,50);
@@ -53,7 +56,10 @@ public class Calc implements ActionListener
         b14.setBounds(50,50,50,50);
         b15.setBounds(50,50,50,50);
         b16.setBounds(50,50,50,50);
-        
+        b17.setBounds(50,50,50,50);
+        b18.setBounds(50,50,50,50);
+        b19.setBounds(50,50,50,50);
+
         b0.addActionListener(this);
         b1.addActionListener(this);
         b2.addActionListener(this);
@@ -71,7 +77,10 @@ public class Calc implements ActionListener
         b14.addActionListener(this);
         b15.addActionListener(this);
         b16.addActionListener(this);
-        
+        b17.addActionListener(this);
+        b18.addActionListener(this);
+        b19.addActionListener(this);
+
         p.add(b0);
         p.add(b1);
         p.add(b2);
@@ -89,7 +98,10 @@ public class Calc implements ActionListener
         p.add(b14);
         p.add(b15);
         p.add(b16);
-        
+        p.add(b17);
+        p.add(b18);
+        p.add(b19);
+
         p.add(res);
         f.add(p);
         f.setSize(900,900);
@@ -105,8 +117,8 @@ public class Calc implements ActionListener
            res.setText("");
            s="";
            break;
-           
-           
+
+
            case 2:
            double n1=0,n2=0,r=0;
            String rs;
@@ -120,35 +132,55 @@ public class Calc implements ActionListener
                     if (ch=='+'||ch=='-'||ch=='*'||ch=='/')
                     {
                         n1=Double.valueOf(s.substring(0,i));
-                        
+
                         n2=Double.valueOf(s.substring(i+1,l-1));
                         break;
                     }
+                    else if (ch=='s'||ch=='c'||ch=='t')
+                    {
+                      n1=Double.valueOf(s.substring(3,l-1));
+                      break;
+                    }
                }
-               if (ch=='+')
-                   r=n1+n2;
-               else if (ch=='-')
-                  r=n1-n2;
-               else if (ch=='*')
-                   r=n1*n2;
-               else if (ch=='/')
-                   r=n1/n2;
+               switch (ch)
+               {
+                 case '+':
+                 r=n1+n2;
+                 break;
+                 case '-':
+                 r=n1-n2;
+                 break;
+                 case '*':
+                 r=n1*n2;
+                 break;
+                 case '/':
+                 r=n1/n2;
+                 break;
+                 case 's':
+                 r=(double) Math.round(Math.sin(Math.toRadians(n1))*100)/100;;
+                 break;
+                 case 'c':
+                 r=(double) Math.round(Math.cos(Math.toRadians(n1))*100)/100;
+                 break;
+                 case 't':
+                 r=(double) Math.round(Math.tan(Math.toRadians(n1))*100)/100;
+               }
                }
                rs=Double.toString(r);
                res.setText(rs);
                s=rs;
            break;
-           
-           
-           
+
+
+
            case 3:
            res.setText(s);
           }
     }
-    
+
     public int checkCase(String a)
     {
-       
+
         for (int i=0;i<a.length();i++)
         {
             char ch=a.charAt(i);
@@ -156,7 +188,7 @@ public class Calc implements ActionListener
             return 1;
             else if (ch=='=')
             return 2;
-            
+
         }
         return 3;
     }
